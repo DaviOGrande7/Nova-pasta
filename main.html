@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: rgb(32, 35, 41);
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+        .card img{
+            border-radius: 10%;
+            border: 2px solid rgb(75, 73, 100);
+            max-width: 300px;
+            height: auto;
+        }
+        .card {
+            border: 2px solid rgb(75, 73, 100);         
+            padding: 10px;
+            margin: 2px;
+            text-align: center;
+            background-color: rgb(52, 49, 68);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container"></div>
+
+    <script>
+        fetch("https://rickandmortyapi.com/api/character/",{
+            method:'GET'
+        })
+        .then(Response=> Response.json())
+        .then(function(json){
+            
+            var container = document.querySelector('.container')
+
+            json.results.map(function(results){
+                container.innerHTML+=`
+                    <div class="card"> 
+                        <img src=` + results.image + `><br>
+                        <strong style="color: white">` + results.name + ` </strong><br>
+                        <span style="color: white">` + results.species + ` </span><br>
+                        <span style="color: white">` + results.origin.name + ` </span><br>
+                        <i style="color: white">` + results.status + ` </i><br> 
+                    </div>
+                `;
+            })
+        })
+    </script>
+</body>
+</html>
